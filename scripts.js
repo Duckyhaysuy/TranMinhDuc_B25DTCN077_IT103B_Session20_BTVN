@@ -34,6 +34,7 @@ function handleSubmit() {
         editingId = null;
         document.getElementById('formTitle').textContent = '🎵 Thêm bài hát';
         document.getElementById('submitBtn').textContent = 'Thêm';
+        document.getElementById('cancelBtn').style.display = 'none';
     } else {
         const newSong = { id: Date.now(), title, artist };
         songs.push(newSong);
@@ -41,6 +42,7 @@ function handleSubmit() {
     saveSongs();
     displaySongs();
     clearForm();
+    document.getElementById('cancelBtn').style.display = 'none';
 }
 
 function editSong(id) {
@@ -50,6 +52,15 @@ function editSong(id) {
     editingId = id;
     document.getElementById('formTitle').textContent = '🎵 Sửa bài hát';
     document.getElementById('submitBtn').textContent = 'Cập nhật';
+    document.getElementById('cancelBtn').style.display = 'inline-block';
+}
+
+function cancelEdit() {
+    editingId = null;
+    document.getElementById('formTitle').textContent = '🎵 Thêm bài hát';
+    document.getElementById('submitBtn').textContent = 'Thêm';
+    clearForm();
+    document.getElementById('cancelBtn').style.display = 'none';
 }
 
 function deleteSong(id) {
