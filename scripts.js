@@ -3,21 +3,27 @@ let songs = JSON.parse(localStorage.getItem('songs')) || [];
 let editingId = null;
 
 function displaySongs(songsToDisplay = songs) {
-    const tbody = document.getElementById('songTable');
-    tbody.innerHTML = '';
-    songsToDisplay.forEach((song, index) => {
+    const tsong = document.getElementById('songTable');
+    tsong.innerHTML = '';
+    if (songsToDisplay.length === 0) {
         const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${song.title}</td>
-            <td>${song.artist}</td>
-            <td>
-                <button onclick="editSong(${song.id})">Sửa</button>
-                <button onclick="deleteSong(${song.id})">Xóa</button>
-            </td>
-        `;
-        tbody.appendChild(row);
-    });
+        row.innerHTML = '<td colspan="4">Không có bài hát nào.</td>';
+        tsong.appendChild(row);
+    } else {
+        songsToDisplay.forEach((song, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${song.title}</td>
+                <td>${song.artist}</td>
+                <td>
+                    <button onclick="editSong(${song.id})">Sửa</button>
+                    <button onclick="deleteSong(${song.id})">Xóa</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
 }
 
 function handleSubmit() {
@@ -70,8 +76,8 @@ function deleteSong(id) {
 }
 
 function searchSong() {
-    const query = document.getElementById('search').value.toLowerCase();
-    const filtered = songs.filter(song => song.title.toLowerCase().includes(query));
+    const findSong = document.getElementById('search').value.toLowerCase();
+    const filtered = songs.filter(song => song.title.toLowerCase().includes(findSong));
     displaySongs(filtered);
 }
 
