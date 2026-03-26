@@ -21,7 +21,7 @@ function displaySongs(songsToDisplay = songs) {
                     <button onclick="deleteSong(${song.id})">Xóa</button>
                 </td>
             `;
-            tbody.appendChild(row);
+            tsong.appendChild(row);
         });
     }
 }
@@ -31,6 +31,10 @@ function handleSubmit() {
     const artist = document.getElementById('artist').value.trim();
     if (!title || !artist) {
         alert('Vui lòng nhập đầy đủ thông tin');
+        return;
+    }
+    if (title.length < 2 || artist.length < 2) {
+        alert('Tên bài hát và nghệ sĩ phải có ít nhất 2 ký tự.');
         return;
     }
     if (editingId !== null) {
